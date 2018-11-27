@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class EventSearchResultListAdapter extends RecyclerView.Adapter<EventSearchResultListAdapter.ViewHolder> {
 	private static final String TAG = "EventSearchResultListAd";
-	private ArrayList<String> mEventNames = new ArrayList<>();
+	private ArrayList<String> mEventNames;
 	private Context mContext;
 
 	public EventSearchResultListAdapter(Context mContext, ArrayList<String> mEventNames) {
@@ -29,7 +29,7 @@ public class EventSearchResultListAdapter extends RecyclerView.Adapter<EventSear
 	// Responsible for inflating view
 	@Override
 	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_event_search_result_list, parent, false);
+		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_result_list_row, parent, false);
 		ViewHolder holder = new ViewHolder(view);
 
 		return holder;
@@ -38,6 +38,7 @@ public class EventSearchResultListAdapter extends RecyclerView.Adapter<EventSear
 	@Override
 	public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 		Log.d(TAG, "onBindViewHolder: called.");
+		Log.d(TAG, "onBindViewHolder: viewHolder=" + viewHolder);
 
 		/*
 		Glide.with(mContext)

@@ -41,9 +41,8 @@ public class EventSearchResultListActivity extends AppCompatActivity {
 	}
 	
 	private void initRecyclerView() {
-		Log.d(TAG, "initRecyclerView: init recyclerview.");
-
 		RecyclerView recyclerView = findViewById(R.id.search_result_list_recycler_view);
+
 		EventSearchResultListAdapter adapter = new EventSearchResultListAdapter(this, mEventNames);
 		recyclerView.setAdapter(adapter);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
