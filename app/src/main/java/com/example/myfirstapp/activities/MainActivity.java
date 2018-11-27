@@ -1,4 +1,4 @@
-package com.example.myfirstapp;
+package com.example.myfirstapp.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.myfirstapp.R;
 
 import org.json.JSONObject;
 
@@ -79,6 +80,11 @@ public class MainActivity extends AppCompatActivity {
 	 */
 	public void openEventSearchActivity(View view) {
 		Intent intent = new Intent(this, EventSearchActivity.class);
+		startActivity(intent);
+	}
+
+	public void onSearchFormSubmit(View view) {
+		Intent intent = new Intent(this, EventSearchResultListActivity.class);
 		startActivity(intent);
 	}
 }

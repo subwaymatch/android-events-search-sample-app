@@ -1,9 +1,11 @@
-package com.example.myfirstapp;
+package com.example.myfirstapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import com.example.myfirstapp.R;
 
 public class DisplayMessageActivity extends AppCompatActivity {
 

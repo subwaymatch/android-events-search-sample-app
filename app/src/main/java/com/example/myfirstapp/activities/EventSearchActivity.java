@@ -1,4 +1,4 @@
-package com.example.myfirstapp;
+package com.example.myfirstapp.activities;
 
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+
+import com.example.myfirstapp.R;
 
 public class EventSearchActivity extends AppCompatActivity {
 

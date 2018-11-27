@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/event_summary_item_layout"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+
+	<ImageView android:id="@+id/categoryIcon"
+		android:layout_width="60dp"
+		android:layout_height="60dp"
+		app:srcCompat="@drawable/music_icon"
+		android:contentDescription="Icon for event category" />
+
+	<TextView android:id="@+id/eventName"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Canada"
+		android:layout_toRightOf="@+id/categoryIcon"
+		android:textColor="#000"
+		android:layout_centerVertical="true"
+		android:layout_marginLeft="30dp"
+		android:textSize="17sp"/>
+
+</RelativeLayout>
