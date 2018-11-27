@@ -17,9 +17,6 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class MainActivity extends AppCompatActivity {
 	public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
@@ -45,26 +42,6 @@ public class MainActivity extends AppCompatActivity {
 	 */
 	public void getLocation(View view) {
 		RequestQueue httpRequestQueue = Volley.newRequestQueue(this);
-
-		String url1 = "http://ip-api.com/json";
-
-		Log.d("http", "pre-request url=" + url1);
-
-		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-				Request.Method.GET, url1, null, new Response.Listener<JSONObject>() {
-				@Override
-				public void onResponse(JSONObject response) {
-					Log.d("http", "Response: " + response.toString());
-				}
-
-			}, new Response.ErrorListener() {
-				@Override
-				public void onErrorResponse(VolleyError error) {
-					Log.d("http", "onErrorResponse");
-					Log.e("http", error.getMessage());
-				}
-			}
-		);
 
 		String baseUrl = "https://postman-echo.com/get";
 
@@ -94,9 +71,14 @@ public class MainActivity extends AppCompatActivity {
 			}
 		);
 
-		httpRequestQueue.getCache().clear();
-
-		httpRequestQueue.add(jsonObjectRequest);
 		httpRequestQueue.add(jsonObjectRequest2);
+	}
+
+	/**
+	 * Called when user clicks on Open Event Search button
+	 */
+	public void openEventSearchActivity(View view) {
+		Intent intent = new Intent(this, EventSearchActivity.class);
+		startActivity(intent);
 	}
 }
