@@ -27,7 +27,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="Event Name"
-			android:textColor="#777"
+			android:textColor="#666"
 			android:textStyle="bold"
 			android:textSize="15sp"/>
 
@@ -35,15 +35,14 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="Venue Name"
-			android:textColor="#777"
+			android:textColor="#666"
 			android:textSize="15sp"/>
 
 		<TextView android:id="@+id/eventDate"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="0000-00-00 00:00:00"
-			android:textColor="#777"
-			android:textStyle="bold"
+			android:textColor="#666"
 			android:textSize="15sp"/>
 
 	</LinearLayout>

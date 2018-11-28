@@ -48,7 +48,7 @@ public class EventSearchResultListActivity extends AppCompatActivity {
 
 		Uri builtUri = Uri.parse(baseUrl)
 				.buildUpon()
-				.appendQueryParameter("keyword", "Los Angeles Lakers")
+				.appendQueryParameter("keyword", "christmas")
 				.appendQueryParameter("categoryId", "")
 				.appendQueryParameter("distanceMetric", "miles")
 				.appendQueryParameter("useCurrentLocation", "true")
