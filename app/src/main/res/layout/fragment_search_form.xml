@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:padding="16dp"
+	tools:context=".fragments.SearchFormFragment">
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/search_label_keyword" />
+
+	<TextView
+		android:id="@+id/searchFormKeywordRequired"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/search_message_required_fields"
+		android:paddingTop="8dp"
+		android:textColor="@color/colorError"
+		android:visibility="gone" />
+
+	<AutoCompleteTextView
+		android:id="@+id/searchFormKeyword"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:hint="@string/search_hint_keyword"
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp" />
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/search_label_category" />
+
+	<Spinner
+		android:id="@+id/searchFormCategory"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:entries="@array/search_category_display_names"/>
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/search_label_distance" />
+
+	<EditText
+		android:id="@+id/searchFormDistance"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:hint="@string/search_hint_distance"
+		android:inputType="number" />
+
+	<Spinner
+		android:id="@+id/searchFormDistanceMetric"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:entries="@array/search_distance_metrics"/>
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/search_label_from" />
+
+	<TextView
+		android:id="@+id/searchFormLocationRequired"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/search_message_required_fields"
+		android:paddingTop="8dp"
+		android:textColor="@color/colorError"
+		android:visibility="gone" />
+
+	<RadioGroup
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<RadioButton
+			android:id="@+id/searchFormUseCurrentLocation"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/search_label_current_location"></RadioButton>
+
+		<RadioButton
+			android:id="@+id/searchFormUseOtherLocation"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/search_label_other_location"></RadioButton>
+
+	</RadioGroup>
+
+	<EditText
+		android:id="@+id/searchFormLocation"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:hint="@string/search_hint_location"
+		android:inputType="text" />
+
+
+
+</LinearLayout>

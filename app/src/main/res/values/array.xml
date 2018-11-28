@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="search_category_display_names">
+		<item>All</item>
+		<item>Music</item>
+		<item>Sports</item>
+		<item>Arts &amp; Theatre</item>
+		<item>Film</item>
+		<item>Miscellaneous</item>
+	</string-array>
+
+	<string-array name="search_category_values">
+		<item></item>
+		<item>KZFzniwnSyZfZ7v7nJ</item>
+		<item>KZFzniwnSyZfZ7v7nE</item>
+		<item>KZFzniwnSyZfZ7v7na</item>
+		<item>KZFzniwnSyZfZ7v7nn</item>
+		<item>KZFzniwnSyZfZ7v7n1</item>
+	</string-array>
+
+	<string-array name="search_distance_metrics">
+		<item>miles</item>
+		<item>km</item>
+	</string-array>
+</resources>
