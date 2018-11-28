@@ -4,5 +4,6 @@
 		<domain includeSubdomains="true">127.0.0.1</domain>
 		<domain includeSubdomains="true">localhost</domain>
 		<domain includeSubdomains="true">ip-api.com</domain>
+		<domain includeSubdomains="true">ticketmaster-v1.us-west-1.elasticbeanstalk.com</domain>
 	</domain-config>
 </network-security-config>

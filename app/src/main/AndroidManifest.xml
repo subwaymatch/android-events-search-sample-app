@@ -33,7 +33,12 @@
 			android:name=".activities.EventSearchActivity"
 			android:label="@string/title_activity_event_search"
 			android:theme="@style/AppTheme.NoActionBar" />
-		<activity android:name=".activities.EventSearchResultListActivity"></activity>
+		<activity
+			android:name=".activities.EventSearchResultListActivity"
+			android:parentActivityName=".activities.MainActivity">
+			<meta-data
+				android:name="android.support.PARENT_ACTIVITY"
+				android:value=".activities.MainActivity" /></activity>
 	</application>
 
 </manifest>

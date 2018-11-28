@@ -11,17 +11,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.models.EventSummary;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class EventSearchResultListAdapter extends RecyclerView.Adapter<EventSearchResultListAdapter.ViewHolder> {
 	private static final String TAG = "EventSearchResultListAd";
-	private ArrayList<String> mEventNames;
+	private List<EventSummary> mEventNames;
 	private Context mContext;
 
-	public EventSearchResultListAdapter(Context mContext, ArrayList<String> mEventNames) {
+	public EventSearchResultListAdapter(Context mContext, List<EventSummary> mEventNames) {
 		this.mEventNames = mEventNames;
 		this.mContext = mContext;
 	}
@@ -47,14 +47,14 @@ public class EventSearchResultListAdapter extends RecyclerView.Adapter<EventSear
 				.into(viewHolder.categoryIcon);
 				*/
 
-		viewHolder.eventName.setText(mEventNames.get(position));
+		viewHolder.eventName.setText(mEventNames.get(position).name);
 
 		viewHolder.itemLayout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Log.d(TAG, "onClick: clicked on: " + mEventNames.get(position));
 
-				Toast.makeText(mContext, mEventNames.get(position), Toast.LENGTH_SHORT).show();
+				Toast.makeText(mContext, mEventNames.get(position).name, Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -68,6 +68,7 @@ public class EventSearchResultListAdapter extends RecyclerView.Adapter<EventSear
 		RelativeLayout itemLayout;
 		ImageView categoryIcon;
 		TextView eventName;
+		ImageView favoriteIcon;
 
 		// Holds the individual widgets in memory
 		public ViewHolder(View itemView) {

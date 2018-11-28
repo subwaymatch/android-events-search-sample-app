@@ -3,22 +3,58 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:padding="15dp"
+	android:padding="16dp"
 	android:id="@+id/event_summary_item_layout">
 
 	<ImageView android:id="@+id/categoryIcon"
-		android:layout_width="60dp"
-		android:layout_height="60dp"
+		android:layout_width="40dp"
+		android:layout_height="40dp"
 		app:srcCompat="@drawable/music_icon"
-		android:contentDescription="Icon for event category" />
+		android:contentDescription="Icon for event category"
+		android:layout_centerVertical="true"/>
 
-	<TextView android:id="@+id/eventName"
-		android:layout_width="wrap_content"
+	<LinearLayout
+		android:id="@+id/eventInfo"
+		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:text="Canada"
 		android:layout_toRightOf="@+id/categoryIcon"
-		android:textColor="#000"
+		android:layout_toLeftOf="@+id/favoriteIcon"
 		android:layout_centerVertical="true"
-		android:layout_marginLeft="30dp"
-		android:textSize="17sp"/>
+		android:layout_marginLeft="16dp"
+		android:orientation="vertical">
+
+		<TextView android:id="@+id/eventName"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Event Name"
+			android:textColor="#777"
+			android:textStyle="bold"
+			android:textSize="15sp"/>
+
+		<TextView android:id="@+id/venueName"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Venue Name"
+			android:textColor="#777"
+			android:textSize="15sp"/>
+
+		<TextView android:id="@+id/eventDate"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="0000-00-00 00:00:00"
+			android:textColor="#777"
+			android:textStyle="bold"
+			android:textSize="15sp"/>
+
+	</LinearLayout>
+
+	<ImageView android:id="@+id/favoriteIcon"
+		android:layout_width="30dp"
+		android:layout_height="30dp"
+		app:srcCompat="@drawable/heart_outline_black"
+		android:contentDescription="Icon for favorite status"
+		android:layout_alignParentRight="true"
+		android:layout_marginLeft="16dp"
+		android:layout_centerVertical="true"/>
+
 </RelativeLayout>

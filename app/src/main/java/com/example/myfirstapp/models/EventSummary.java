@@ -18,14 +18,4 @@ public class EventSummary {
 		this.venueId = venueId;
 		this.venueInfo = venueInfo;
 	}
-
-	public static ArrayList<EventSummary> createEventSummary(int numEvents) {
-		ArrayList<EventSummary> eventSummaries = new ArrayList<EventSummary>();
-
-		for (int i = 0; i < numEvents; i++) {
-			eventSummaries.add(new EventSummary("id" + i, "2018/11/11", "Event name " + i, "Category " + i, "venueId" + i, "Staples Center"));
-		}
-
-		return eventSummaries;
-	}
 }
