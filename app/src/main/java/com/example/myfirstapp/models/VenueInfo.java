@@ -9,6 +9,6 @@ public class VenueInfo {
 	public String openHours;
 	public String generalRule;
 	public String childRule;
-	public float lat;
-	public float lng;
+	public double lat;
+	public double lng;
 }

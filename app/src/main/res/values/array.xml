@@ -18,7 +18,12 @@
 		<item>KZFzniwnSyZfZ7v7n1</item>
 	</string-array>
 
-	<string-array name="search_distance_metrics">
+	<string-array name="search_distance_metrics_display_names">
+		<item>Miles</item>
+		<item>Kilometers</item>
+	</string-array>
+
+	<string-array name="search_distance_metrics_values">
 		<item>miles</item>
 		<item>km</item>
 	</string-array>

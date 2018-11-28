@@ -15,6 +15,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.models.EventSummary;
+import com.example.myfirstapp.models.SearchQueryParameters;
 import com.example.myfirstapp.viewadapters.EventSearchResultListAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -36,12 +37,17 @@ public class EventSearchResultListActivity extends AppCompatActivity {
 
 		this.setTitle("Search Results");
 
-		getEventSearchResult();
+		SearchQueryParameters p = (SearchQueryParameters) getIntent().getExtras().getParcelable("searchQueryParameters");
+
+		Log.d(TAG, "onCreate: searchQueryParameters");
+		Log.d(TAG, p.toString());
+
+		getEventSearchResult(p);
 
 		Log.d(TAG, "onCreate: started.");
 	}
 
-	private void getEventSearchResult() {
+	private void getEventSearchResult(SearchQueryParameters p) {
 		RequestQueue httpRequestQueue = Volley.newRequestQueue(this);
 
 		String baseUrl = "http://ticketmaster-v1.us-west-1.elasticbeanstalk.com/api/v1.0/event/search";

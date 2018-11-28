@@ -82,9 +82,4 @@ public class MainActivity extends AppCompatActivity {
 		Intent intent = new Intent(this, EventSearchActivity.class);
 		startActivity(intent);
 	}
-
-	public void onSearchFormSubmit(View view) {
-		Intent intent = new Intent(this, EventSearchResultListActivity.class);
-		startActivity(intent);
-	}
 }

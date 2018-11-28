@@ -56,26 +56,18 @@
 		android:id="@+id/searchFormDistanceMetric"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:entries="@array/search_distance_metrics"/>
+		android:entries="@array/search_distance_metrics_display_names"/>
 
 	<TextView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:text="@string/search_label_from" />
 
-	<TextView
-		android:id="@+id/searchFormLocationRequired"
+	<RadioGroup
+		android:id="@+id/searchFormLocationRadioGroup"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="@string/search_message_required_fields"
-		android:paddingTop="8dp"
-		android:textColor="@color/colorError"
-		android:visibility="gone" />
-
-	<RadioGroup
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
-
+		android:checkedButton="@+id/searchFormUseCurrentLocation">
 		<RadioButton
 			android:id="@+id/searchFormUseCurrentLocation"
 			android:layout_width="match_parent"
@@ -87,8 +79,16 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:text="@string/search_label_other_location"></RadioButton>
-
 	</RadioGroup>
+
+	<TextView
+		android:id="@+id/searchFormLocationRequired"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/search_message_required_fields"
+		android:paddingTop="8dp"
+		android:textColor="@color/colorError"
+		android:visibility="gone" />
 
 	<EditText
 		android:id="@+id/searchFormLocation"
@@ -97,6 +97,24 @@
 		android:hint="@string/search_hint_location"
 		android:inputType="text" />
 
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
 
+		<Button
+			android:id="@+id/searchFormSubmitButton"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="0.5"
+			android:text="@string/search_button_submit" />
+
+		<Button
+			android:id="@+id/searchFormClearButton"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="0.5"
+			android:text="@string/search_button_clear" />
+	</LinearLayout>
 
 </LinearLayout>

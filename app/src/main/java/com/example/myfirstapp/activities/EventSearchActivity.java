@@ -67,17 +67,17 @@ public class EventSearchActivity extends AppCompatActivity {
 		@Override
 		public Fragment getItem(int position) {
 			if (position == 0) {
-				searchFormFragment = SearchFormFragment.newInstance("hello", "world");
+				searchFormFragment = SearchFormFragment.newInstance();
 				return searchFormFragment;
 			}
 
 			else {
 				// getItem is called to instantiate the fragment for the given page.
 				// Return a PlaceholderFragment (defined as a static inner class below).
-				return SearchFormFragment.newInstance("hello", "world");
+				return SearchFormFragment.newInstance();
 			}
 		}
-		
+
 		@Override
 		public int getCount() {
 			// Show 2 total pages.

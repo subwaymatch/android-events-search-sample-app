@@ -2,7 +2,6 @@ package com.example.myfirstapp.viewadapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,8 +64,6 @@ public class EventSearchResultListAdapter extends RecyclerView.Adapter<EventSear
 		viewHolder.favoriteIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.d(TAG, "onClick: favorite icon clicked");
-
 				if (favoriteEventsHelper.checkIfFavorite(eventSummary.id)) {
 					favoriteEventsHelper.remove(eventSummary.id);
 					viewHolder.favoriteIcon.setImageResource(R.drawable.heart_outline_black);
@@ -99,17 +96,12 @@ public class EventSearchResultListAdapter extends RecyclerView.Adapter<EventSear
 		public ViewHolder(View itemView) {
 			super(itemView);
 
-			Log.d(TAG, "ViewHolder: itemView=" + itemView);
-
 			categoryIcon = itemView.findViewById(R.id.categoryIcon);
 			eventName = itemView.findViewById(R.id.eventName);
 			venueName = itemView.findViewById(R.id.venueName);
 			eventDate = itemView.findViewById(R.id.eventDate);
 			itemLayout = itemView.findViewById(R.id.event_summary_item_layout);
 			favoriteIcon = itemView.findViewById(R.id.favoriteIcon);
-
-			Log.d(TAG, "ViewHolder: categoryIcon=" + categoryIcon);
-			Log.d(TAG, "ViewHolder: eventName=" + eventName);
 		}
 	}
 }
