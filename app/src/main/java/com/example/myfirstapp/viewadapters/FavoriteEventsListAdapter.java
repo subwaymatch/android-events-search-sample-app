@@ -2,6 +2,7 @@ package com.example.myfirstapp.viewadapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,35 +14,41 @@ import android.widget.Toast;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.activities.EventDetailActivity;
+import com.example.myfirstapp.fragments.FavoriteEventsFragment;
 import com.example.myfirstapp.helpers.FavoriteEventsHelper;
 import com.example.myfirstapp.helpers.ViewHelper;
 import com.example.myfirstapp.models.EventSummary;
 
 import java.util.List;
 
-public class EventSearchResultListAdapter extends RecyclerView.Adapter<EventSearchResultListAdapter.ViewHolder> {
-	private static final String TAG = "EventSearchResultListAd";
-	private List<EventSummary> mEventSummaries;
+public class FavoriteEventsListAdapter extends RecyclerView.Adapter<FavoriteEventsListAdapter.ViewHolder> {
+	private static final String TAG = "FavoriteEventsListAdapt";
+
 	private Context mContext;
+	private FavoriteEventsFragment favoriteEventsFragment;
+
+	private List<EventSummary> mEventSummaries;
 	private final FavoriteEventsHelper favoriteEventsHelper;
 
-	public EventSearchResultListAdapter(Context mContext, List<EventSummary> eventSummaries) {
-		this.mEventSummaries = eventSummaries;
+	public FavoriteEventsListAdapter(Context mContext, FavoriteEventsFragment favoriteEventsFragment, List<EventSummary> eventSummaries) {
 		this.mContext = mContext;
+		this.favoriteEventsFragment = favoriteEventsFragment;
+
+		this.mEventSummaries = eventSummaries;
 		this.favoriteEventsHelper = FavoriteEventsHelper.getInstance();
 	}
 
 	// Responsible for inflating view
 	@Override
-	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+	public FavoriteEventsListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_result_list_row, parent, false);
-		ViewHolder holder = new ViewHolder(view);
+		FavoriteEventsListAdapter.ViewHolder holder = new FavoriteEventsListAdapter.ViewHolder(view);
 
 		return holder;
 	}
 
 	@Override
-	public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
+	public void onBindViewHolder(final FavoriteEventsListAdapter.ViewHolder viewHolder, final int position) {
 		final EventSummary eventSummary = mEventSummaries.get(position);
 
 		// Set category
@@ -70,14 +77,16 @@ public class EventSearchResultListAdapter extends RecyclerView.Adapter<EventSear
 			public void onClick(View v) {
 				if (favoriteEventsHelper.checkIfFavorite(eventSummary.id)) {
 					favoriteEventsHelper.remove(eventSummary);
-					viewHolder.favoriteIcon.setImageResource(R.drawable.heart_outline_black);
-					Toast.makeText(mContext,  eventSummary.name + " was removed from favorites", Toast.LENGTH_SHORT).show();
-				}
 
-				else {
-					favoriteEventsHelper.add(eventSummary);
-					viewHolder.favoriteIcon.setImageResource(R.drawable.heart_fill_red);
-					Toast.makeText(mContext,  eventSummary.name + " was added to favorites", Toast.LENGTH_SHORT).show();
+					mEventSummaries.remove(eventSummary);
+					notifyItemRemoved(position);
+					notifyItemRangeChanged(position, mEventSummaries.size());
+
+					if (mEventSummaries.isEmpty()) {
+						favoriteEventsFragment.showEmptyMessage();
+					}
+
+					Toast.makeText(mContext,  eventSummary.name + " was removed from favorites", Toast.LENGTH_SHORT).show();
 				}
 			}
 		});

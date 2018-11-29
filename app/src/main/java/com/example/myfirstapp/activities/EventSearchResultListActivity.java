@@ -32,9 +32,9 @@ public class EventSearchResultListActivity extends AppCompatActivity {
 	private static final String TAG = "EventSearchResultListAc";
 	private static EventSearchResultListAdapter recyclerViewAdapter;
 
-	RecyclerView eventsRecyclerView;
-	RelativeLayout progressWrapper;
-	TextView listEmptyText;
+	private RecyclerView eventsRecyclerView;
+	private RelativeLayout progressWrapper;
+	private TextView listEmptyText;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

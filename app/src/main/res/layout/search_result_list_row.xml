@@ -6,7 +6,7 @@
 	android:padding="16dp"
 	android:id="@+id/event_summary_item_layout">
 
-	<ImageView android:id="@+id/categoryIcon"
+	<ImageView android:id="@+id/searchResultRowCategoryIcon"
 		android:layout_width="40dp"
 		android:layout_height="40dp"
 		app:srcCompat="@drawable/music_icon"
@@ -14,16 +14,16 @@
 		android:layout_centerVertical="true"/>
 
 	<LinearLayout
-		android:id="@+id/eventInfo"
+		android:id="@+id/searchResultRowEventInfo"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:layout_toRightOf="@+id/categoryIcon"
-		android:layout_toLeftOf="@+id/favoriteIcon"
+		android:layout_toRightOf="@+id/searchResultRowCategoryIcon"
+		android:layout_toLeftOf="@+id/searchResultRowFavoriteIcon"
 		android:layout_centerVertical="true"
 		android:layout_marginLeft="16dp"
 		android:orientation="vertical">
 
-		<TextView android:id="@+id/eventName"
+		<TextView android:id="@+id/searchResultRowEventName"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="Event Name"
@@ -31,14 +31,14 @@
 			android:textStyle="bold"
 			android:textSize="15sp"/>
 
-		<TextView android:id="@+id/venueName"
+		<TextView android:id="@+id/searchResultRowVenueName"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="Venue Name"
 			android:textColor="#666"
 			android:textSize="15sp"/>
 
-		<TextView android:id="@+id/eventDate"
+		<TextView android:id="@+id/searchResultRowEventDate"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="0000-00-00 00:00:00"
@@ -47,7 +47,7 @@
 
 	</LinearLayout>
 
-	<ImageView android:id="@+id/favoriteIcon"
+	<ImageView android:id="@+id/searchResultRowFavoriteIcon"
 		android:layout_width="30dp"
 		android:layout_height="30dp"
 		app:srcCompat="@drawable/heart_outline_black"

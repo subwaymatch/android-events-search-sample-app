@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -131,11 +132,13 @@ public class EventDetailActivity extends AppCompatActivity {
 			if (!favoriteEventsHelper.checkIfFavorite(eventSummary.id)) {
 				favoriteEventsHelper.add(eventSummary);
 				eventDetailFavoriteIcon.setIcon(R.drawable.heart_fill_red);
+				Toast.makeText(this, eventSummary.name + " was added to favorites", Toast.LENGTH_SHORT);
 			}
 
 			else {
 				favoriteEventsHelper.remove(eventSummary);
 				eventDetailFavoriteIcon.setIcon(R.drawable.heart_fill_white);
+				Toast.makeText(this, eventSummary.name + " was removed from favorites", Toast.LENGTH_SHORT);
 			}
 
 			return true;

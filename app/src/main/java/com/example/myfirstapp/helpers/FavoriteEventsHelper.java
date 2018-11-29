@@ -14,6 +14,7 @@ public class FavoriteEventsHelper {
 	private static FavoriteEventsHelper instance;
 
 	private Set<String> favoriteEventIds;
+
 	private List<EventSummary> favoriteEvents;
 
 	private FavoriteEventsHelper() {
@@ -45,5 +46,9 @@ public class FavoriteEventsHelper {
 		Log.d(TAG, "remove: favorite events length=" + favoriteEventIds.size());
 
 		favoriteEvents.remove(eventSummary);
+	}
+
+	public List<EventSummary> getFavoriteEvents() {
+		return favoriteEvents;
 	}
 }

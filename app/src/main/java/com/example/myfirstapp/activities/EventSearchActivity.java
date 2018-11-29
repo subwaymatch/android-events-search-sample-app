@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.fragments.FavoriteEventsFragment;
 import com.example.myfirstapp.fragments.SearchFormFragment;
 
 public class EventSearchActivity extends AppCompatActivity {
@@ -65,14 +66,11 @@ public class EventSearchActivity extends AppCompatActivity {
 		@Override
 		public Fragment getItem(int position) {
 			if (position == 0) {
-				searchFormFragment = SearchFormFragment.newInstance();
-				return searchFormFragment;
+				return SearchFormFragment.newInstance();
 			}
 
 			else {
-				// getItem is called to instantiate the fragment for the given page.
-				// Return a PlaceholderFragment (defined as a static inner class below).
-				return SearchFormFragment.newInstance();
+				return FavoriteEventsFragment.newInstance();
 			}
 		}
 
