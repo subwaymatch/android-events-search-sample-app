@@ -17,11 +17,6 @@
 		android:theme="@style/AppTheme"
 		tools:ignore="GoogleAppIndexingWarning">
 		<activity android:name=".activities.MainActivity">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
 		</activity>
 		<activity
 			android:name=".activities.DisplayMessageActivity"
@@ -33,7 +28,12 @@
 		<activity
 			android:name=".activities.EventSearchActivity"
 			android:label="@string/title_activity_event_search"
-			android:theme="@style/AppTheme.NoActionBar" />
+			android:theme="@style/AppTheme.NoActionBar">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
 		<activity
 			android:name=".activities.EventSearchResultListActivity"
 			android:parentActivityName=".activities.EventSearchActivity">
