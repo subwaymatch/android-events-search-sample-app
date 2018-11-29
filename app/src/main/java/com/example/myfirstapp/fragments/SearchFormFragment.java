@@ -80,7 +80,6 @@ public class SearchFormFragment extends Fragment {
 	 *
 	 * @return A new instance of fragment SearchFormFragment.
 	 */
-	// TODO: Rename and change types and number of parameters
 	public static SearchFormFragment newInstance() {
 		SearchFormFragment fragment = new SearchFormFragment();
 		Bundle args = new Bundle();

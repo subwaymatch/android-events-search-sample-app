@@ -23,22 +23,20 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.fragments.eventdetail.ArtistTeamPhotosFragment;
+import com.example.myfirstapp.fragments.eventdetail.EventInfoFragment;
+import com.example.myfirstapp.fragments.eventdetail.UpcomingEventsFragment;
+import com.example.myfirstapp.fragments.eventdetail.VenueInfoFragment;
 import com.example.myfirstapp.helpers.FavoriteEventsHelper;
+import com.example.myfirstapp.models.ArtistTeamPhotos;
 import com.example.myfirstapp.models.EventDetail;
 import com.example.myfirstapp.models.EventSummary;
-import com.example.myfirstapp.models.SearchQueryParameters;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.lang.reflect.Type;
-import java.util.List;
 
 public class EventDetailActivity extends AppCompatActivity {
 	private static final String TAG = "EventDetailActivity";
@@ -71,25 +69,22 @@ public class EventDetailActivity extends AppCompatActivity {
 
 		favoriteEventsHelper = FavoriteEventsHelper.getInstance();
 
-		if (getIntent().getExtras() != null) {
-			eventSummary = (EventSummary) getIntent().getExtras().getParcelable("eventSummary");
-
-			Log.d(TAG, "onCreate: searchQueryParameters");
-			Log.d(TAG, eventSummary.toString());
-
-			getEventDetail(eventSummary.id, eventSummary.venueId);
-		}
-
-		// If no EventSummary object has been passed, do nothing
-		else {
+		if (getIntent().getExtras() == null) {
 			return;
 		}
+
+		eventSummary = (EventSummary) getIntent().getExtras().getParcelable("eventSummary");
 
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 		toolbar.setTitle(eventSummary.name);
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+		fetchEventDetail(eventSummary.id, eventSummary.venueId);
+	}
+
+	private void initializeViewWithEventDetail() {
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -164,41 +159,6 @@ public class EventDetailActivity extends AppCompatActivity {
 	}
 
 	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		private static final String ARG_SECTION_NUMBER = "section_number";
-
-		public PlaceholderFragment() {
-		}
-
-		/**
-		 * Returns a new instance of this fragment for the given section
-		 * number.
-		 */
-		public static PlaceholderFragment newInstance(int sectionNumber) {
-			PlaceholderFragment fragment = new PlaceholderFragment();
-			Bundle args = new Bundle();
-			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-			fragment.setArguments(args);
-			return fragment;
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-								 Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_event_detail, container, false);
-			TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-			textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-			return rootView;
-		}
-	}
-
-	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.
 	 */
@@ -210,9 +170,21 @@ public class EventDetailActivity extends AppCompatActivity {
 
 		@Override
 		public Fragment getItem(int position) {
-			// getItem is called to instantiate the fragment for the given page.
-			// Return a PlaceholderFragment (defined as a static inner class below).
-			return PlaceholderFragment.newInstance(position + 1);
+			if (position == 0) {
+				return EventInfoFragment.newInstance();
+			}
+
+			else if (position == 1) {
+				return ArtistTeamPhotosFragment.newInstance();
+			}
+
+			else if (position == 2) {
+				return VenueInfoFragment.newInstance();
+			}
+
+			else {
+				return UpcomingEventsFragment.newInstance();
+			}
 		}
 
 		@Override
@@ -222,7 +194,7 @@ public class EventDetailActivity extends AppCompatActivity {
 		}
 	}
 
-	private void getEventDetail(final String eventId, final String venueId) {
+	private void fetchEventDetail(final String eventId, final String venueId) {
 		// Show progress circle
 		// this.progressWrapper.setVisibility(View.VISIBLE);
 
@@ -253,7 +225,9 @@ public class EventDetailActivity extends AppCompatActivity {
 				eventDetail.eventInfo.id = eventId;
 				eventDetail.venueInfo.id = venueId;
 
-				Log.d(TAG, "getEventDetail: retrieving event detail result");
+				initializeViewWithEventDetail();
+
+				Log.d(TAG, "fetchEventDetail: retrieving event detail result");
 				Log.d(TAG, eventDetail.toString());
 			}
 
@@ -269,4 +243,7 @@ public class EventDetailActivity extends AppCompatActivity {
 		httpRequestQueue.add(jsonArrayRequest);
 	}
 
+	public EventDetail getEventDetail() {
+		return eventDetail;
+	}
 }
