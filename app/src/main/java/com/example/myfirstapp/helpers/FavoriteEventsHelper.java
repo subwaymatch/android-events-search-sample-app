@@ -4,7 +4,9 @@ import android.util.Log;
 
 import com.example.myfirstapp.models.EventSummary;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class FavoriteEventsHelper {
@@ -12,9 +14,11 @@ public class FavoriteEventsHelper {
 	private static FavoriteEventsHelper instance;
 
 	private Set<String> favoriteEventIds;
+	private List<EventSummary> favoriteEvents;
 
 	private FavoriteEventsHelper() {
 		favoriteEventIds = new HashSet<String>();
+		favoriteEvents = new ArrayList<EventSummary>();
 	}
 
 	public static FavoriteEventsHelper getInstance() {
@@ -32,11 +36,14 @@ public class FavoriteEventsHelper {
 	public void add(EventSummary eventSummary) {
 		favoriteEventIds.add(eventSummary.id);
 		Log.d(TAG, "add: favorite events length=" + favoriteEventIds.size());
+
+		favoriteEvents.add(eventSummary);
 	}
 
-	public void remove(String eventId) {
-		favoriteEventIds.remove(eventId);
+	public void remove(EventSummary eventSummary) {
+		favoriteEventIds.remove(eventSummary.id);
 		Log.d(TAG, "remove: favorite events length=" + favoriteEventIds.size());
-	}
 
+		favoriteEvents.remove(eventSummary);
+	}
 }

@@ -3,6 +3,8 @@ package com.example.myfirstapp.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Objects;
+
 public class EventSummary implements Parcelable {
 	public String id;
 	public String date;
@@ -53,6 +55,25 @@ public class EventSummary implements Parcelable {
 		dest.writeString(this.category);
 		dest.writeString(this.venueId);
 		dest.writeString(this.venueInfo);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		EventSummary that = (EventSummary) o;
+		return Objects.equals(id, that.id) &&
+				Objects.equals(date, that.date) &&
+				Objects.equals(name, that.name) &&
+				Objects.equals(category, that.category) &&
+				Objects.equals(venueId, that.venueId) &&
+				Objects.equals(venueInfo, that.venueInfo);
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(id, date, name, category, venueId, venueInfo);
 	}
 
 	@Override

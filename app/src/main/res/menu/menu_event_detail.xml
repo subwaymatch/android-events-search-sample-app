@@ -4,7 +4,7 @@
 	tools:context="com.example.myfirstapp.activities.EventDetailActivity">
 	<item
 		android:id="@+id/eventDetailFavoriteIcon"
-		android:icon="@drawable/heart_outline_white"
+		android:icon="@drawable/heart_fill_white"
 		android:title="Favorite Icon"
 		app:showAsAction="always"></item>
 

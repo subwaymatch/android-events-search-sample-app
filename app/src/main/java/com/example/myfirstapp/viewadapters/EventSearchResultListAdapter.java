@@ -69,7 +69,7 @@ public class EventSearchResultListAdapter extends RecyclerView.Adapter<EventSear
 			@Override
 			public void onClick(View v) {
 				if (favoriteEventsHelper.checkIfFavorite(eventSummary.id)) {
-					favoriteEventsHelper.remove(eventSummary.id);
+					favoriteEventsHelper.remove(eventSummary);
 					viewHolder.favoriteIcon.setImageResource(R.drawable.heart_outline_black);
 					Toast.makeText(mContext,  eventSummary.name + " was removed from favorites", Toast.LENGTH_SHORT).show();
 				}

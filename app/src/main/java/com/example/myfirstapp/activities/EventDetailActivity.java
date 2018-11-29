@@ -1,5 +1,6 @@
 package com.example.myfirstapp.activities;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.helpers.FavoriteEventsHelper;
 import com.example.myfirstapp.models.EventDetail;
 import com.example.myfirstapp.models.EventSummary;
 import com.example.myfirstapp.models.SearchQueryParameters;
@@ -42,6 +44,9 @@ public class EventDetailActivity extends AppCompatActivity {
 
 	private EventSummary eventSummary;
 	private EventDetail eventDetail;
+	private FavoriteEventsHelper favoriteEventsHelper;
+
+	private MenuItem eventDetailFavoriteIcon;
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -63,11 +68,7 @@ public class EventDetailActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_detail);
 
-		String eventId = getIntent().getExtras().getString("eventId");
-		String eventName = getIntent().getExtras().getString("eventName");
-		String venueId = getIntent().getExtras().getString("venueId");
-
-		Log.d(TAG, "onCreate: eventId=" + eventId + ", eventName=" + eventName + ", venueId=" + venueId);
+		favoriteEventsHelper = FavoriteEventsHelper.getInstance();
 
 		if (getIntent().getExtras() != null) {
 			eventSummary = (EventSummary) getIntent().getExtras().getParcelable("eventSummary");
@@ -85,7 +86,7 @@ public class EventDetailActivity extends AppCompatActivity {
 
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-		toolbar.setTitle(eventName);
+		toolbar.setTitle(eventSummary.name);
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		// Create the adapter that will return a fragment for each of the three
@@ -93,7 +94,7 @@ public class EventDetailActivity extends AppCompatActivity {
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 		// Set up the ViewPager with the sections adapter.
-		mViewPager = (ViewPager) findViewById(R.id.container);
+		mViewPager = (ViewPager) findViewById(R.id.eventDetailViewPagerContainer);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -107,6 +108,13 @@ public class EventDetailActivity extends AppCompatActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_event_detail, menu);
+
+		eventDetailFavoriteIcon = menu.findItem(R.id.eventDetailFavoriteIcon);
+
+		if (favoriteEventsHelper.checkIfFavorite(eventSummary.id)) {
+			eventDetailFavoriteIcon.setIcon(R.drawable.heart_fill_red);
+		}
+
 		return true;
 	}
 
@@ -119,11 +127,33 @@ public class EventDetailActivity extends AppCompatActivity {
 
 		if (id == R.id.eventDetailFavoriteIcon) {
 			Log.d(TAG, "onOptionsItemSelected: favorite icon");
+
+			if (!favoriteEventsHelper.checkIfFavorite(eventSummary.id)) {
+				favoriteEventsHelper.add(eventSummary);
+				eventDetailFavoriteIcon.setIcon(R.drawable.heart_fill_red);
+			}
+
+			else {
+				favoriteEventsHelper.remove(eventSummary);
+				eventDetailFavoriteIcon.setIcon(R.drawable.heart_fill_white);
+			}
+
 			return true;
 		}
 
 		else if (id == R.id.eventDetailTwitterIcon) {
 			Log.d(TAG, "onOptionsItemSelected: twitter icon");
+
+			if (eventDetail != null) {
+				String tweetBaseURL = "https://twitter.com/intent/tweet?text=";
+				String tweetText = "Check out " + this.eventSummary.name + " at " + this.eventDetail.venueInfo.name + ". Website: " + this.eventDetail.eventInfo.buyTicketAt + "  #CSCI571EventSearch";
+
+				String tweetUrl = tweetBaseURL + Uri.encode(tweetText);
+
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(tweetUrl));
+				startActivity(browserIntent);
+			}
+
 			return true;
 		}
 
