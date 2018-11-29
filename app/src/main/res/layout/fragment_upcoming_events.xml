@@ -5,6 +5,27 @@
 	android:layout_height="match_parent"
 	tools:context=".fragments.eventdetail.UpcomingEventsFragment">
 
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:layout_marginTop="6dp">
+
+		<Spinner
+			android:id="@+id/upcomingEventsSortBy"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="0.5"
+			android:entries="@array/upcoming_events_sort_by_values"/>
+
+		<Spinner
+			android:id="@+id/upcomingEventsSortDirection"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="0.5"
+			android:entries="@array/upcoming_events_sort_direction_values"/>
+	</LinearLayout>
+
 	<ScrollView
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
@@ -14,11 +35,20 @@
 			android:layout_height="wrap_content"
 			android:orientation="vertical">
 
-			<TextView
+			<android.support.v7.widget.RecyclerView
+				android:id="@+id/upcomingEventsRecyclerView"
+				android:scrollbars="vertical"
 				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:text="UpcomingEventsFragment" />
-
+				android:layout_height="wrap_content"
+				android:visibility="gone"/>
 		</LinearLayout>
 	</ScrollView>
+
+	<TextView
+		android:id="@+id/upcomingEventsEmptyText"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:text="@string/upcoming_event_list_empty"
+		android:visibility="gone" />
 </FrameLayout>

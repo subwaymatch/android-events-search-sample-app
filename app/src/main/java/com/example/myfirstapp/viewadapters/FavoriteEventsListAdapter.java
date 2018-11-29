@@ -2,7 +2,6 @@ package com.example.myfirstapp.viewadapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +44,7 @@ public class FavoriteEventsListAdapter extends RecyclerView.Adapter<FavoriteEven
 	// Responsible for inflating view
 	@Override
 	public FavoriteEventsListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_result_list_row, parent, false);
+		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_result_list_item, parent, false);
 		FavoriteEventsListAdapter.ViewHolder holder = new FavoriteEventsListAdapter.ViewHolder(view);
 
 		return holder;

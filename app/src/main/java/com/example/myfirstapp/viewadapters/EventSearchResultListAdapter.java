@@ -34,7 +34,7 @@ public class EventSearchResultListAdapter extends RecyclerView.Adapter<EventSear
 	// Responsible for inflating view
 	@Override
 	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_result_list_row, parent, false);
+		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_result_list_item, parent, false);
 		ViewHolder holder = new ViewHolder(view);
 
 		return holder;
