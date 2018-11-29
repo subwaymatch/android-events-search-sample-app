@@ -4,8 +4,8 @@
 	package="com.example.myfirstapp">
 
 	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 	<application
 		android:allowBackup="true"
@@ -36,10 +36,20 @@
 			android:theme="@style/AppTheme.NoActionBar" />
 		<activity
 			android:name=".activities.EventSearchResultListActivity"
-			android:parentActivityName=".activities.MainActivity">
+			android:parentActivityName=".activities.EventSearchActivity">
 			<meta-data
 				android:name="android.support.PARENT_ACTIVITY"
-				android:value=".activities.MainActivity" /></activity>
+				android:value=".activities.EventSearchActivity" />
+		</activity>
+		<activity
+			android:name=".activities.EventDetailActivity"
+			android:label="@string/title_activity_event_detail"
+			android:parentActivityName=".activities.EventSearchResultListActivity"
+			android:theme="@style/AppTheme.NoActionBar">
+			<meta-data
+				android:name="android.support.PARENT_ACTIVITY"
+				android:value="com.example.myfirstapp.activities.EventSearchResultListActivity" />
+		</activity>
 	</application>
 
 </manifest>

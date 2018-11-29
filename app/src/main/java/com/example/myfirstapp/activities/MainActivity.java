@@ -39,43 +39,6 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	/**
-	 * Called when the user clicks on the Get Location button
-	 */
-	public void getLocation(View view) {
-		RequestQueue httpRequestQueue = Volley.newRequestQueue(this);
-
-		String baseUrl = "https://postman-echo.com/get";
-
-		Uri builtUri = Uri.parse(baseUrl)
-				.buildUpon()
-				.appendQueryParameter("paramOne", "1")
-				.appendQueryParameter("paramTwo", "2")
-				.build();
-
-		String urlWithParams = builtUri.toString();
-
-		Log.d("http", "pre-request url=" + urlWithParams);
-
-		JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(
-				Request.Method.GET, urlWithParams, null, new Response.Listener<JSONObject>() {
-				@Override
-				public void onResponse(JSONObject response) {
-					Log.d("http", "Response: " + response.toString());
-				}
-
-			}, new Response.ErrorListener() {
-				@Override
-				public void onErrorResponse(VolleyError error) {
-					Log.d("http", "onErrorResponse");
-					Log.e("http", error.getMessage());
-				}
-			}
-		);
-
-		httpRequestQueue.add(jsonObjectRequest2);
-	}
-
-	/**
 	 * Called when user clicks on Open Event Search button
 	 */
 	public void openEventSearchActivity(View view) {

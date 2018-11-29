@@ -21,4 +21,20 @@
 	<string name="search_hint_location">Type in the Location</string>
 	<string name="search_button_submit">SEARCH</string>
 	<string name="search_button_clear">CLEAR</string>
+
+	<!-- Favorite list -->
+	<string name="favorite_list_empty">No Favorites</string>
+
+	<!-- Search result list -->
+	<string name="search_result_list_loading">Searching Events...</string>
+	<string name="search_result_list_empty">No results</string>
+
+	<!-- Event detail -->
+	<string name="event_detail_tab_event">EVENT</string>
+	<string name="event_detail_tab_artist">ARTIST(S)</string>
+	<string name="event_detail_tab_venue">VENUE</string>
+	<string name="event_detail_tab_upcoming">UPCOMING</string>
+	<string name="upcoming_event_list_empty">No Record</string>
+	<string name="title_activity_event_detail">EventDetailActivity</string>
+	<string name="section_format">Hello World from section: %1$d</string>
 </resources>

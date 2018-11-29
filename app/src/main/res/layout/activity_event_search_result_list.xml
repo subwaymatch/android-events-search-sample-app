@@ -1,7 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- A RecyclerView with some commonly used attributes -->
-<android.support.v7.widget.RecyclerView android:id="@+id/search_result_list_recycler_view"
-	android:scrollbars="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	xmlns:android="http://schemas.android.com/apk/res/android" />
+	android:layout_height="match_parent">
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/searchResultListRecyclerView"
+		android:scrollbars="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:visibility="gone" />
+
+	<RelativeLayout
+		android:id="@+id/searchResultListProgressWrapper"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerVertical="true"
+		android:layout_centerHorizontal="true"
+		android:orientation="horizontal"
+		android:visibility="gone">
+
+		<ProgressBar
+			android:id="@+id/searchResultListProgressCircle"
+			style="?android:attr/progressBarStyleLarge"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerVertical="true" />
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@+id/searchResultListProgressCircle"
+			android:layout_centerVertical="true"
+			android:layout_marginLeft="20dp"
+			android:text="@string/search_result_list_loading" />
+	</RelativeLayout>
+
+	<TextView
+		android:id="@+id/searchResultListEmptyText"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerVertical="true"
+		android:layout_centerHorizontal="true"
+		android:text="@string/search_result_list_empty"
+		android:visibility="gone" />
+
+</RelativeLayout>

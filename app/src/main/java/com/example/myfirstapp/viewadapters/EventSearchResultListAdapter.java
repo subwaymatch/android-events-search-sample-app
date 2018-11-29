@@ -1,6 +1,7 @@
 package com.example.myfirstapp.viewadapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.activities.EventDetailActivity;
 import com.example.myfirstapp.helpers.FavoriteEventsHelper;
 import com.example.myfirstapp.helpers.ViewHelper;
 import com.example.myfirstapp.models.EventSummary;
@@ -57,6 +59,9 @@ public class EventSearchResultListAdapter extends RecyclerView.Adapter<EventSear
 		viewHolder.itemLayout.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Intent intent = new Intent(mContext, EventDetailActivity.class);
+				mContext.startActivity(intent);
+
 				Toast.makeText(mContext, eventSummary.name, Toast.LENGTH_SHORT).show();
 			}
 		});
