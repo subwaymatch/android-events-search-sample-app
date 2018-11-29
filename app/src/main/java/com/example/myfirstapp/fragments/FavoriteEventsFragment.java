@@ -84,7 +84,6 @@ public class FavoriteEventsFragment extends Fragment {
 
 			eventsRecyclerView.setAdapter(recyclerViewAdapter);
 			eventsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-			eventsRecyclerView.setVisibility(View.VISIBLE);
 
 			eventsRecyclerView.setVisibility(View.VISIBLE);
 			listEmptyText.setVisibility(View.GONE);
