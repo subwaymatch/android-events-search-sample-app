@@ -4,52 +4,8 @@
 	android:id="@+id/eventInfoTableLayout"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:stretchColumns="2"
+	android:stretchColumns="1"
 	android:layout_margin="8dp"
 	tools:context=".fragments.eventdetail.EventInfoFragment">
-
-	<TableRow>
-		<TextView
-			android:layout_column="1"
-			android:text="Artist/Team(s)"
-			style="@style/InfoTableCell.Header" />
-		<TextView
-			android:layout_column="2"
-			android:text="Lady Gaga"
-			style="@style/InfoTableCell.Value" />
-	</TableRow>
-
-	<TableRow>
-		<TextView
-			android:layout_column="1"
-			android:text="Venue"
-			style="@style/InfoTableCell.Header" />
-		<TextView
-			android:layout_column="2"
-			android:text="Park Theater"
-			style="@style/InfoTableCell.Value" />
-	</TableRow>
-
-	<TableRow>
-		<TextView
-			android:layout_column="1"
-			android:text="Buy Ticket At"
-			style="@style/InfoTableCell.Header" />
-		<TextView
-			android:layout_column="2"
-			android:text="@string/event_info_ticketmaster"
-			style="@style/InfoTableCell.Value.Link" />
-	</TableRow>
-
-	<TableRow>
-		<TextView
-			android:layout_column="1"
-			android:text="Seat Map"
-			style="@style/InfoTableCell.Header" />
-		<TextView
-			android:layout_column="2"
-			android:text="@string/event_info_view_here"
-			style="@style/InfoTableCell.Value.Link" />
-	</TableRow>
 
 </TableLayout>
