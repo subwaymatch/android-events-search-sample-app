@@ -5,10 +5,31 @@
 	android:layout_height="match_parent"
 	tools:context=".fragments.eventdetail.VenueInfoFragment">
 
-	<!-- TODO: Update blank fragment layout -->
-	<TextView
+	<ScrollView
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:text="VenueInfoFragment" />
+		android:layout_height="match_parent">
 
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<TableLayout
+				android:id="@+id/venueInfoTableLayout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:stretchColumns="1"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:layout_marginTop="20dp"
+				android:layout_marginBottom="20dp">
+			</TableLayout>
+
+			<com.google.android.gms.maps.MapView
+				android:id="@+id/venueMap"
+				android:name="com.google.android.gms.maps.SupportMapFragment"
+				android:layout_width="match_parent"
+				android:layout_height="400dp" />
+		</LinearLayout>
+	</ScrollView>
 </FrameLayout>

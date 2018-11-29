@@ -17,21 +17,4 @@
 
 	<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-	<style name="InfoTableCell">
-		<item name="android:textSize">16dp</item>
-	</style>
-
-	<style name="InfoTableCell.Header">
-		<item name="android:textStyle">bold</item>
-		<item name="android:padding">8dp</item>
-	</style>
-
-	<style name="InfoTableCell.Value">
-		<item name="android:padding">8dp</item>
-	</style>
-
-	<style name="InfoTableCell.Value.Link">
-		<item name="android:textColor">@color/colorAccent</item>
-	</style>
-
 </resources>

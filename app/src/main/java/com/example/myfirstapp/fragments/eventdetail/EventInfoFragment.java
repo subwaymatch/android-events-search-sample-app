@@ -55,7 +55,7 @@ public class EventInfoFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// Get event detail data from 
+		// Get event detail data from parent activity
 		eventDetail = ((EventDetailActivity) getActivity()).getEventDetail();
 		eventInfo = eventDetail.eventInfo;
 	}
@@ -71,7 +71,7 @@ public class EventInfoFragment extends Fragment {
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		eventInfoTableLayout = getActivity().findViewById(R.id.eventInfoTableLayout);
+		eventInfoTableLayout = view.findViewById(R.id.eventInfoTableLayout);
 
 		if (eventInfo.artistTeam != null && eventInfo.artistTeam.length > 0) {
 			ViewHelper.addTextRowToTable(eventInfoTableLayout, getActivity(), "Artist/Team(s)", TextUtils.join(" | ", eventInfo.artistTeam));
