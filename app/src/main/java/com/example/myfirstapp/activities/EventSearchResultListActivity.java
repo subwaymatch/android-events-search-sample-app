@@ -41,7 +41,7 @@ public class EventSearchResultListActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_search_result_list);
 
-		this.setTitle("Search Results");
+		setTitle("Search Results");
 
 		this.eventsRecyclerView = findViewById(R.id.searchResultListRecyclerView);
 		this.progressWrapper = findViewById(R.id.searchResultListProgressWrapper);
@@ -70,47 +70,6 @@ public class EventSearchResultListActivity extends AppCompatActivity {
 		else {
 			showRecyclerView();
 		}
-	}
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		Log.d(TAG, "onSaveInstanceState: ");
-
-		super.onSaveInstanceState(outState);
-	}
-
-	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		Log.d(TAG, "onRestoreInstanceState: ");
-		super.onRestoreInstanceState(savedInstanceState);
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-
-		Log.d(TAG, "onPause: paused");
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-
-		Log.d(TAG, "onResume: resumed");
-	}
-
-	@Override
-	protected void onStop() {
-		super.onStop();
-
-		Log.d(TAG, "onStop: stopped");
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-
-		Log.d(TAG, "onDestroy: destroyed");
 	}
 
 	private void getEventSearchResult(SearchQueryParameters p) {

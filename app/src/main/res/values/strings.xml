@@ -1,8 +1,5 @@
 <resources>
-	<string name="app_name">My First App</string>
-	<string name="edit_message">Enter a message</string>
-	<string name="button_send">Send</string>
-	<string name="get_location">Get Location</string>
+	<string name="app_name">Event Search</string>
 	<string name="title_activity_event_search">EventSearchActivity</string>
 	<string name="main_tab_search_text">SEARCH</string>
 	<string name="main_tab_favorite_text">FAVORITE</string>
@@ -36,5 +33,6 @@
 	<string name="event_detail_tab_upcoming">UPCOMING</string>
 	<string name="upcoming_event_list_empty">No Record</string>
 	<string name="title_activity_event_detail">EventDetailActivity</string>
+
 	<string name="section_format">Hello World from section: %1$d</string>
 </resources>

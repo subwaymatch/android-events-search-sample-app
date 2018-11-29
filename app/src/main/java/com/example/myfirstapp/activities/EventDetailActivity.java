@@ -1,26 +1,25 @@
 package com.example.myfirstapp.activities;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.TextView;
 
 import com.example.myfirstapp.R;
 
 public class EventDetailActivity extends AppCompatActivity {
+	private static final String TAG = "EventDetailActivity";
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -42,7 +41,15 @@ public class EventDetailActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_detail);
 
+		String eventId = getIntent().getExtras().getString("eventId");
+		String eventName = getIntent().getExtras().getString("eventName");
+		String venueId = getIntent().getExtras().getString("venueId");
+
+		Log.d(TAG, "onCreate: eventId=" + eventId + ", eventName=" + eventName + ", venueId=" + venueId);
+
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+		toolbar.setTitle(eventName);
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		// Create the adapter that will return a fragment for each of the three
@@ -53,15 +60,10 @@ public class EventDetailActivity extends AppCompatActivity {
 		mViewPager = (ViewPager) findViewById(R.id.container);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 
-		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-		fab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-						.setAction("Action", null).show();
-			}
-		});
+		TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
+		mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+		tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 	}
 
 
@@ -79,8 +81,13 @@ public class EventDetailActivity extends AppCompatActivity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 
-		//noinspection SimplifiableIfStatement
-		if (id == R.id.action_settings) {
+		if (id == R.id.eventDetailFavoriteIcon) {
+			Log.d(TAG, "onOptionsItemSelected: favorite icon");
+			return true;
+		}
+
+		else if (id == R.id.eventDetailTwitterIcon) {
+			Log.d(TAG, "onOptionsItemSelected: twitter icon");
 			return true;
 		}
 
@@ -141,8 +148,8 @@ public class EventDetailActivity extends AppCompatActivity {
 
 		@Override
 		public int getCount() {
-			// Show 3 total pages.
-			return 3;
+			// Show 4 total pages.
+			return 4;
 		}
 	}
 }

@@ -3,8 +3,14 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	tools:context="com.example.myfirstapp.activities.EventDetailActivity">
 	<item
-		android:id="@+id/action_settings"
-		android:orderInCategory="100"
-		android:title="@string/action_settings"
-		app:showAsAction="never" />
+		android:id="@+id/eventDetailFavoriteIcon"
+		android:icon="@drawable/heart_outline_white"
+		android:title="Favorite Icon"
+		app:showAsAction="always"></item>
+
+	<item
+		android:id="@+id/eventDetailTwitterIcon"
+		android:icon="@drawable/twitter_ic"
+		android:title="Twitter Icon"
+		app:showAsAction="always"></item>
 </menu>

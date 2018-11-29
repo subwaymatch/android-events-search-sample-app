@@ -60,9 +60,12 @@ public class EventSearchResultListAdapter extends RecyclerView.Adapter<EventSear
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(mContext, EventDetailActivity.class);
-				mContext.startActivity(intent);
 
-				Toast.makeText(mContext, eventSummary.name, Toast.LENGTH_SHORT).show();
+				intent.putExtra("eventId", eventSummary.id);
+				intent.putExtra("eventName", eventSummary.name);
+				intent.putExtra("venueId", eventSummary.venueId);
+
+				mContext.startActivity(intent);
 			}
 		});
 
