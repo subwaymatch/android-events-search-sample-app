@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.models.UpcomingEvent;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class UpcomingEventsListAdapter extends RecyclerView.Adapter<UpcomingEventsListAdapter.ViewHolder> {
@@ -23,15 +26,69 @@ public class UpcomingEventsListAdapter extends RecyclerView.Adapter<UpcomingEven
 
 	private List<UpcomingEvent> mUpcomingEvents;
 
+	private String sortBy;
+	private int sortDirectionMultiplier;
+
 	public UpcomingEventsListAdapter(Context mContext, List<UpcomingEvent> upcomingEvents) {
 		this.mContext = mContext;
 
 		this.mUpcomingEvents = upcomingEvents;
 	}
 
-	public void reorderList(String sortBy, boolean isAscending) {
+	public void setSortBy(String sortBy) {
 		// TODO: Reorder upcoming events here
+		this.sortBy = sortBy;
+
+		Log.d(TAG, "setSortBy: new sortBy=" + this.sortBy);
+
+		reorderList();
 	}
+
+	public void setSortDirection(String sortDirection) {
+		// TODO: Set sort direction
+		this.sortDirectionMultiplier = "Ascending".equals(sortDirection) ? 1 : -1;
+
+		Log.d(TAG, "setSortDirection: new sortDirectionMultipler=" + this.sortDirectionMultiplier);
+
+		reorderList();
+	}
+
+	public void reorderList() {
+		Collections.sort(mUpcomingEvents, new Comparator<UpcomingEvent>() {
+			public int compare(UpcomingEvent event1, UpcomingEvent event2) {
+				int compareResult = 0;
+
+				if ("Event Name".equals(sortBy)) {
+					compareResult = event1.name.compareTo(event2.name);
+				}
+
+				else if ("Time".equals(sortBy)) {
+					compareResult = ((Integer) event1.timestamp).compareTo(event2.timestamp);
+				}
+
+				else if ("Artist".equals(sortBy)) {
+					compareResult = event1.artist.compareTo(event2.artist);
+				}
+
+				else if ("Type".equals(sortBy)) {
+					compareResult = event1.type.compareTo(event2.type);
+				}
+
+				else {
+					compareResult = event1.id.compareTo(event2.id);
+				}
+
+				if (!"Default".equals(sortBy)) {
+					compareResult *= sortDirectionMultiplier;
+				}
+
+				return compareResult;
+			}
+		});
+
+		this.notifyDataSetChanged();
+	}
+
 
 	// Responsible for inflating view
 	@Override

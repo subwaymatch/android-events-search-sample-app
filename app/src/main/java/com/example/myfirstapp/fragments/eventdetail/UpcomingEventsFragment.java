@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -86,6 +87,52 @@ public class UpcomingEventsFragment extends Fragment {
 		upcomingEventsListWrapper = view.findViewById(R.id.upcomingEventsListWrapper);
 		eventsRecyclerView = view.findViewById(R.id.upcomingEventsRecyclerView);
 		listEmptyText = view.findViewById(R.id.upcomingEventsEmptyText);
+		upcomingEventsSortBySpinner = view.findViewById(R.id.upcomingEventsSortBy);
+		upcomingEventsSortDirectionSpinner = view.findViewById(R.id.upcomingEventsSortDirection);
+
+		upcomingEventsSortBySpinner.setEnabled(false);
+		upcomingEventsSortDirectionSpinner.setEnabled(false);
+
+		upcomingEventsSortBySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+				// your code here
+				String sortBy = getResources().getStringArray(R.array.upcoming_events_sort_by_values)[position];
+
+				if ("Default".equals(sortBy)) {
+					upcomingEventsSortDirectionSpinner.setSelection(0);
+					upcomingEventsSortDirectionSpinner.setEnabled(false);
+				}
+
+				else {
+					upcomingEventsSortDirectionSpinner.setEnabled(true);
+				}
+
+				recyclerViewAdapter.setSortBy(sortBy);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parentView) {
+				return;
+			}
+
+		});
+
+		upcomingEventsSortDirectionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+				// your code here
+				String sortDirection = getResources().getStringArray(R.array.upcoming_events_sort_direction_values)[position];
+
+				recyclerViewAdapter.setSortDirection(sortDirection);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parentView) {
+				return;
+			}
+
+		});
 
 		initRecyclerView();
 	}
@@ -98,6 +145,7 @@ public class UpcomingEventsFragment extends Fragment {
 			eventsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 			upcomingEventsListWrapper.setVisibility(View.VISIBLE);
+			upcomingEventsSortBySpinner.setEnabled(true);
 			listEmptyText.setVisibility(View.GONE);
 		} else {
 			showEmptyMessage();
