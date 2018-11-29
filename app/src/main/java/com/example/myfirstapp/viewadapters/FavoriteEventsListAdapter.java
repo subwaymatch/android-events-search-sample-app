@@ -38,6 +38,10 @@ public class FavoriteEventsListAdapter extends RecyclerView.Adapter<FavoriteEven
 		this.favoriteEventsHelper = FavoriteEventsHelper.getInstance();
 	}
 
+	public void updateList(List<EventSummary> newList) {
+		mEventSummaries = newList;
+	}
+
 	// Responsible for inflating view
 	@Override
 	public FavoriteEventsListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

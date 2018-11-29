@@ -1,14 +1,11 @@
 package com.example.myfirstapp.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +26,7 @@ import java.util.List;
 public class FavoriteEventsFragment extends Fragment {
 	private static final String TAG = "FavoriteEventsFragment";
 
-	List<EventSummary> favoriteEventSummaries;
-	private static FavoriteEventsListAdapter recyclerViewAdapter;
+	private FavoriteEventsListAdapter recyclerViewAdapter;
 
 	private RecyclerView eventsRecyclerView;
 	private TextView listEmptyText;
@@ -71,27 +67,20 @@ public class FavoriteEventsFragment extends Fragment {
 
 		eventsRecyclerView = view.findViewById(R.id.favoriteEventsRecyclerView);
 		listEmptyText = view.findViewById(R.id.favoriteEventsEmptyText);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
 
 		initRecyclerView();
 	}
 
-	@Override
-	public void onAttach(Context context) {
-		super.onAttach(context);
-	}
-
-	@Override
-	public void onDetach() {
-		super.onDetach();
-	}
-
 	private void initRecyclerView() {
-		favoriteEventSummaries = FavoriteEventsHelper.getInstance().getFavoriteEvents();
+		List<EventSummary> favoriteEventSummaries = FavoriteEventsHelper.getInstance().getFavoriteEvents();
 
 		if (!favoriteEventSummaries.isEmpty()) {
 			recyclerViewAdapter = new FavoriteEventsListAdapter(getActivity(), this, favoriteEventSummaries);
-
-			Log.d(TAG, "showRecyclerView: recyclerViewAdapter=" + recyclerViewAdapter);
 
 			eventsRecyclerView.setAdapter(recyclerViewAdapter);
 			eventsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -99,9 +88,7 @@ public class FavoriteEventsFragment extends Fragment {
 
 			eventsRecyclerView.setVisibility(View.VISIBLE);
 			listEmptyText.setVisibility(View.GONE);
-		}
-
-		else {
+		} else {
 			showEmptyMessage();
 		}
 	}
