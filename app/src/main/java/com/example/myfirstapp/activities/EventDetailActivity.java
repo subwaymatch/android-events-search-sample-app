@@ -1,5 +1,6 @@
 package com.example.myfirstapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,13 +11,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -31,7 +31,6 @@ import com.example.myfirstapp.fragments.eventdetail.EventInfoFragment;
 import com.example.myfirstapp.fragments.eventdetail.UpcomingEventsFragment;
 import com.example.myfirstapp.fragments.eventdetail.VenueInfoFragment;
 import com.example.myfirstapp.helpers.FavoriteEventsHelper;
-import com.example.myfirstapp.models.ArtistTeamPhotos;
 import com.example.myfirstapp.models.EventDetail;
 import com.example.myfirstapp.models.EventSummary;
 import com.google.gson.Gson;
@@ -46,6 +45,8 @@ public class EventDetailActivity extends AppCompatActivity {
 	private FavoriteEventsHelper favoriteEventsHelper;
 
 	private MenuItem eventDetailFavoriteIcon;
+	private ViewPager viewPagerContainer;
+	private RelativeLayout progressWrapper;
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -69,6 +70,9 @@ public class EventDetailActivity extends AppCompatActivity {
 
 		favoriteEventsHelper = FavoriteEventsHelper.getInstance();
 
+		viewPagerContainer = findViewById(R.id.eventDetailViewPagerContainer);
+		progressWrapper = findViewById(R.id.eventDetailProgressWrapper);
+
 		if (getIntent().getExtras() == null) {
 			return;
 		}
@@ -80,6 +84,10 @@ public class EventDetailActivity extends AppCompatActivity {
 		toolbar.setTitle(eventSummary.name);
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+		// Show progress circle and hide view pager
+		this.viewPagerContainer.setVisibility(View.GONE);
+		this.progressWrapper.setVisibility(View.VISIBLE);
 
 		fetchEventDetail(eventSummary.id, eventSummary.venueId);
 	}
@@ -97,6 +105,10 @@ public class EventDetailActivity extends AppCompatActivity {
 
 		mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 		tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+		// Show progress circle and hide view pager
+		this.viewPagerContainer.setVisibility(View.VISIBLE);
+		this.progressWrapper.setVisibility(View.GONE);
 	}
 
 
@@ -195,8 +207,10 @@ public class EventDetailActivity extends AppCompatActivity {
 	}
 
 	private void fetchEventDetail(final String eventId, final String venueId) {
-		// Show progress circle
-		// this.progressWrapper.setVisibility(View.VISIBLE);
+		// TODO: Remove test code
+		if (true) {
+			String sportEventJson = "{\"eventInfo\":{\"name\":\"Los Angeles Lakers vs. Minnesota Timberwolves\",\"artistTeam\":[\"Los Angeles Lakers\",\"Minnesota Timberwolves\"],\"venue\":\"STAPLES Center\",\"time\":\"Jan 24, 2019 19:30:00\",\"category\":\"Sports | Basketball\",\"priceRange\":null,\"ticketStatus\":\"Onsale\",\"buyTicketAt\":\"https://www.ticketmaster.com/los-angeles-lakers-vs-minnesota-timberwolves-los-angeles-california-01-24-2019/event/2C005508EF040B4F\",\"seatmap\":\"https://s1.ticketm.net/tmimages/venue/maps/la1/la1257c.gif\"},\"venueInfo\":{\"address\":null,\"city\":null,\"phoneNumber\":null,\"openHours\":null,\"generalRule\":null,\"childRule\":null,\"lat\":null,\"lng\":null},\"artistInfos\":null,\"photos\":[{\"name\":\"Los Angeles Lakers\",\"links\":[\"https://imagesvc.timeincapp.com/v3/fan/image?url=https://lakeshowlife.com/wp-content/uploads/getty-images/2018/02/924704066-los-angeles-lakers-v-atlanta-hawks.jpg.jpg&\",\"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Los_Angeles_Lakers_logo.svg/2000px-Los_Angeles_Lakers_logo.svg.png\",\"https://cdn.vox-cdn.com/uploads/chorus_image/image/52871659/usa_today_9639188.0.jpg\",\"https://cdn.nba.net/nba-drupal-prod/styles/landscape/s3/2018-07/lebronjames-lakers.jpg?itok=NJl_vJMq\",\"http://www.michael-weinstein.com/wp-content/uploads/2016/10/nba_logo_redesigns-la_lakers-full.png\",\"http://latfusa.com/media/uploads/2017/08/14/lakers-logo-2.jpg\",\"http://www.magic925.com/wp-content/uploads/2016/05/New-Los-Angeles-Lakers-Wallpapers.jpg\",\"https://clutchpoints.com/wp-content/uploads/2018/08/t34.jpg\",\"https://img.vavel.com/lakerspv-3009423115.jpg\"]},{\"name\":\"Minnesota Timberwolves\",\"links\":[\"https://imagesvc.timeincapp.com/v3/fan/image?url=https://dunkingwithwolves.com/wp-content/uploads/getty-images/2017/07/984673622.jpeg&c=sc&w=3200&h=2133\",\"https://www.nba.com/.element/media/2.0/teamsites/timberwolves/media/mntw-nw-30-lgo-2018-main.png\",\"https://www.targetcenter.com/assets/img/TimberwolvesLogo_665x374-79b4be5528.jpg\",\"https://www.nba.com/timberwolves/sites/timberwolves/files/1819_cityunveil_hero_rose.jpg\",\"https://imagesvc.timeincapp.com/v3/fan/image?url=https://dunkingwithwolves.com/wp-content/uploads/getty-images/2017/07/950864324.jpeg&c=sc&w=3200&h=2133\",\"https://www.nba.com/timberwolves/sites/timberwolves/files/tickets_9_25_17.jpg\",\"https://imagesvc.timeincapp.com/v3/fan/image?url=https://dunkingwithwolves.com/wp-content/uploads/getty-images/2017/09/852045868-2017-18-minnesota-timberwolves-media-day.jpg.jpg&\",\"https://timedotcom.files.wordpress.com/2018/11/ap18305596074357.jpg\",\"https://imagesvc.timeincapp.com/v3/fan/image?url=https://dunkingwithwolves.com/wp-content/uploads/getty-images/2017/09/852045858-2017-18-minnesota-timberwolves-media-day.jpg.jpg&c=sc&w=3483&h=3366\"]}],\"upcomingEvents\":[]}";
+		}
 
 		RequestQueue httpRequestQueue = Volley.newRequestQueue(this);
 

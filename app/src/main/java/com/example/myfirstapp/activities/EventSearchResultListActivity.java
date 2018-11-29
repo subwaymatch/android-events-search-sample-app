@@ -51,9 +51,6 @@ public class EventSearchResultListActivity extends AppCompatActivity {
 		this.progressWrapper.setVisibility(View.GONE);
 		this.listEmptyText.setVisibility(View.GONE);
 
-		Log.d(TAG, "onCreate: getIntent().getExtras()=" + getIntent().getExtras());
-		Log.d(TAG, "onCreate: savedInstanceState=" + savedInstanceState);
-
 		SearchQueryParameters searchQueryParameters = null;
 
 		if (getIntent().getExtras() != null) {
@@ -62,9 +59,7 @@ public class EventSearchResultListActivity extends AppCompatActivity {
 			Log.d(TAG, "onCreate: searchQueryParameters");
 			Log.d(TAG, searchQueryParameters.toString());
 
-			getEventSearchResult(searchQueryParameters);
-
-			Log.d(TAG, "onCreate: started.");
+			fetchEventSearchResult(searchQueryParameters);
 		}
 
 		else {
@@ -72,7 +67,7 @@ public class EventSearchResultListActivity extends AppCompatActivity {
 		}
 	}
 
-	private void getEventSearchResult(SearchQueryParameters p) {
+	private void fetchEventSearchResult(SearchQueryParameters p) {
 		// Show progress circle
 		this.progressWrapper.setVisibility(View.VISIBLE);
 
@@ -114,13 +109,9 @@ public class EventSearchResultListActivity extends AppCompatActivity {
 				Request.Method.GET, urlWithParams, null, new Response.Listener<JSONArray>() {
 			@Override
 			public void onResponse(JSONArray response) {
-				Log.d("http", "Response: " + response.toString());
-
 				Gson gson = new Gson();
 				Type listType = new TypeToken<List<EventSummary>>(){}.getType();
 				List<EventSummary> eventSummaries = gson.fromJson(response.toString(), listType);
-
-				Log.d(TAG, "getEventSearchResult: retrieving event search result");
 
 				if (eventSummaries.size() == 0) {
 					progressWrapper.setVisibility(View.GONE);
@@ -151,8 +142,6 @@ public class EventSearchResultListActivity extends AppCompatActivity {
 	}
 
 	private void showRecyclerView() {
-		Log.d(TAG, "showRecyclerView: recyclerViewAdapter=" + recyclerViewAdapter);
-
 		eventsRecyclerView.setAdapter(recyclerViewAdapter);
 		eventsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 

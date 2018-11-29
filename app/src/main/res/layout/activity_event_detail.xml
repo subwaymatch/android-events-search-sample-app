@@ -67,6 +67,38 @@
 		android:id="@+id/eventDetailViewPagerContainer"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+		app:layout_behavior="@string/appbar_scrolling_view_behavior"
+		android:visibility="gone" />
+
+	<RelativeLayout
+		android:id="@+id/eventDetailProgressWrapper"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior"
+		android:visibility="gone">
+
+		<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerVertical="true"
+			android:layout_centerHorizontal="true"
+			android:orientation="horizontal">
+
+			<ProgressBar
+				android:id="@+id/eventDetailProgressCircle"
+				style="?android:attr/progressBarStyleLarge"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true" />
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_toRightOf="@+id/eventDetailProgressCircle"
+				android:layout_centerVertical="true"
+				android:layout_marginLeft="20dp"
+				android:text="@string/event_detail_loading" />
+		</RelativeLayout>
+	</RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

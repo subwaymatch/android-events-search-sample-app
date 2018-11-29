@@ -13,6 +13,8 @@ public class EventSummary implements Parcelable {
 	public String venueId;
 	public String venueInfo;
 
+	public EventSummary() {}
+
 	public EventSummary(String id, String date, String name, String category, String venueId, String venueInfo) {
 		this.id = id;
 		this.date = date;

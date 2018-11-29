@@ -33,6 +33,7 @@
 	<string name="event_detail_tab_upcoming">UPCOMING</string>
 	<string name="upcoming_event_list_empty">No Record</string>
 	<string name="title_activity_event_detail">EventDetailActivity</string>
+	<string name="event_detail_loading">Loading ...</string>
 
 	<string name="section_format">Hello World from section: %1$d</string>
 
