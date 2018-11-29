@@ -8,4 +8,17 @@ public class UpcomingEvent {
 	public int timestamp;
 	public String type;
 	public String link;
+
+	@Override
+	public String toString() {
+		return "UpcomingEvent{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", artist='" + artist + '\'' +
+				", datetime='" + datetime + '\'' +
+				", timestamp=" + timestamp +
+				", type='" + type + '\'' +
+				", link='" + link + '\'' +
+				'}';
+	}
 }

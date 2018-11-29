@@ -1,5 +1,6 @@
 package com.example.myfirstapp.activities;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -16,10 +17,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.myfirstapp.R;
+import com.example.myfirstapp.models.EventDetail;
+import com.example.myfirstapp.models.EventSummary;
+import com.example.myfirstapp.models.SearchQueryParameters;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class EventDetailActivity extends AppCompatActivity {
 	private static final String TAG = "EventDetailActivity";
+
+	private EventSummary eventSummary;
+	private EventDetail eventDetail;
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -46,6 +68,20 @@ public class EventDetailActivity extends AppCompatActivity {
 		String venueId = getIntent().getExtras().getString("venueId");
 
 		Log.d(TAG, "onCreate: eventId=" + eventId + ", eventName=" + eventName + ", venueId=" + venueId);
+
+		if (getIntent().getExtras() != null) {
+			eventSummary = (EventSummary) getIntent().getExtras().getParcelable("eventSummary");
+
+			Log.d(TAG, "onCreate: searchQueryParameters");
+			Log.d(TAG, eventSummary.toString());
+
+			getEventDetail(eventSummary.id, eventSummary.venueId);
+		}
+
+		// If no EventSummary object has been passed, do nothing
+		else {
+			return;
+		}
 
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -152,4 +188,52 @@ public class EventDetailActivity extends AppCompatActivity {
 			return 4;
 		}
 	}
+
+	private void getEventDetail(final String eventId, final String venueId) {
+		// Show progress circle
+		// this.progressWrapper.setVisibility(View.VISIBLE);
+
+		RequestQueue httpRequestQueue = Volley.newRequestQueue(this);
+
+		String baseUrl = "http://ticketmaster-v1.us-west-1.elasticbeanstalk.com/api/v1.0/event/detail";
+
+		Uri builtUri = Uri.parse(baseUrl)
+				.buildUpon()
+				.appendQueryParameter("eventId", eventId)
+				.appendQueryParameter("venueId", venueId)
+				.build();
+
+		String urlWithParams = builtUri.toString();
+
+		Log.d("http", "pre-request url=" + urlWithParams);
+
+		JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(
+				Request.Method.GET, urlWithParams, null, new Response.Listener<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				Log.d("http", "Response: " + response.toString());
+
+				Gson gson = new Gson();
+				eventDetail = gson.fromJson(response.toString(), EventDetail.class);
+
+				// Fill in event id and venue id
+				eventDetail.eventInfo.id = eventId;
+				eventDetail.venueInfo.id = venueId;
+
+				Log.d(TAG, "getEventDetail: retrieving event detail result");
+				Log.d(TAG, eventDetail.toString());
+			}
+
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				Log.d("http", "onErrorResponse");
+				Log.e("http", error.getMessage());
+			}
+		}
+		);
+
+		httpRequestQueue.add(jsonArrayRequest);
+	}
+
 }

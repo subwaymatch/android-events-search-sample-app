@@ -5,4 +5,14 @@ public class ArtistInfo {
 	public int followers;
 	public int popularity;
 	public String checkAt;
+
+	@Override
+	public String toString() {
+		return "ArtistInfo{" +
+				"name='" + name + '\'' +
+				", followers=" + followers +
+				", popularity=" + popularity +
+				", checkAt='" + checkAt + '\'' +
+				'}';
+	}
 }
