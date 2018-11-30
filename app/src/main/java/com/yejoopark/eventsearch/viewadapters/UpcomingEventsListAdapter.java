@@ -35,7 +35,6 @@ public class UpcomingEventsListAdapter extends RecyclerView.Adapter<UpcomingEven
 	}
 
 	public void setSortBy(String sortBy) {
-		// TODO: Reorder upcoming events here
 		this.sortBy = sortBy;
 
 		Log.d(TAG, "setSortBy: new sortBy=" + this.sortBy);
