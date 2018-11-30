@@ -1,6 +1,5 @@
 package com.example.myfirstapp.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.fragments.FavoriteEventsFragment;
 import com.example.myfirstapp.fragments.SearchFormFragment;
-import com.example.myfirstapp.models.EventSummary;
 
 public class EventSearchActivity extends AppCompatActivity {
 	private static final String TAG = "EventSearchActivity";

@@ -1,6 +1,5 @@
 package com.example.myfirstapp.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -121,7 +119,7 @@ public class EventDetailActivity extends AppCompatActivity {
 
 		eventDetailFavoriteIcon = menu.findItem(R.id.eventDetailFavoriteIcon);
 
-		if (favoriteEventsHelper.checkIfFavorite(eventSummary.id)) {
+		if (favoriteEventsHelper.checkIfFavorite(eventSummary)) {
 			eventDetailFavoriteIcon.setIcon(R.drawable.heart_fill_red);
 		}
 
@@ -138,16 +136,16 @@ public class EventDetailActivity extends AppCompatActivity {
 		if (id == R.id.eventDetailFavoriteIcon) {
 			Log.d(TAG, "onOptionsItemSelected: favorite icon");
 
-			if (!favoriteEventsHelper.checkIfFavorite(eventSummary.id)) {
+			if (!favoriteEventsHelper.checkIfFavorite(eventSummary)) {
 				favoriteEventsHelper.add(eventSummary);
 				eventDetailFavoriteIcon.setIcon(R.drawable.heart_fill_red);
-				Toast.makeText(this, eventSummary.name + " was added to favorites", Toast.LENGTH_SHORT);
+				Toast.makeText(this, eventSummary.name + " was added to favorites", Toast.LENGTH_SHORT).show();
 			}
 
 			else {
 				favoriteEventsHelper.remove(eventSummary);
 				eventDetailFavoriteIcon.setIcon(R.drawable.heart_fill_white);
-				Toast.makeText(this, eventSummary.name + " was removed from favorites", Toast.LENGTH_SHORT);
+				Toast.makeText(this, eventSummary.name + " was removed from favorites", Toast.LENGTH_SHORT).show();
 			}
 
 			return true;

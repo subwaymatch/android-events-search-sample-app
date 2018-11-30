@@ -2,6 +2,8 @@ package com.example.myfirstapp.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -117,10 +119,36 @@ public class SearchFormFragment extends Fragment {
 		searchFormKeywordRequired = view.findViewById(R.id.searchFormKeywordRequired);
 		searchFormLocationRequired = view.findViewById(R.id.searchFormLocationRequired);
 
+		searchFormLocation.setEnabled(false);
+
+		// This overrides the radiogroup onCheckListener
+		searchFormLocationRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+		{
+			public void onCheckedChanged(RadioGroup group, int checkedId)
+			{
+				// This will get the radiobutton that has changed in its check state
+				RadioButton checkedRadioButton = (RadioButton)group.findViewById(checkedId);
+				// This puts the value (true/false) into the variable
+				boolean isChecked = checkedRadioButton.isChecked();
+				// If the radiobutton that has changed in check state is now checked...
+				if (isChecked)
+				{
+					if (checkedId == R.id.searchFormUseCurrentLocation) {
+						Log.d(TAG, "onCheckedChanged: Use current location radio selected");
+						searchFormLocation.setEnabled(false);
+					}
+
+					else {
+						Log.d(TAG, "onCheckedChanged: Use other location radio selected");
+						searchFormLocation.setEnabled(true);
+					}
+				}
+			}
+		});
+
 		searchFormSubmitButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getActivity(), "Submit button clicked", Toast.LENGTH_SHORT).show();
 				submitSearchForm();
 			}
 		});
@@ -128,7 +156,6 @@ public class SearchFormFragment extends Fragment {
 		searchFormClearButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getActivity(), "Clear button clicked", Toast.LENGTH_SHORT).show();
 				clearSearchForm();
 			}
 		});
@@ -136,7 +163,7 @@ public class SearchFormFragment extends Fragment {
 		//Setting up the adapter for AutoSuggest
 		keywordAutocompleteAdapter = new KeywordAutocompleteAdapter(getActivity(),
 				android.R.layout.select_dialog_item);
-		autoCompleteTextView.setThreshold(3);
+		autoCompleteTextView.setThreshold(1);
 		autoCompleteTextView.setAdapter(keywordAutocompleteAdapter);
 		autoCompleteTextView.setOnItemClickListener(
 				new AdapterView.OnItemClickListener() {
@@ -269,8 +296,19 @@ public class SearchFormFragment extends Fragment {
 		p.distanceMetric = getResources().getStringArray(R.array.search_distance_metrics_values)[searchFormDistanceMetric.getSelectedItemPosition()];
 		p.useCurrentLocation = Boolean.toString(searchFormUseCurrentLocation.isChecked());
 		p.originLocation = searchFormLocation.getText().toString();
-		p.userLat = 34.0266;
-		p.userLng = -118.283;
+
+		try {
+			LocationManager lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+			Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+			p.userLat = location.getLatitude();
+			p.userLng = location.getLongitude();
+		} catch (SecurityException e) {
+			Toast.makeText(getActivity(), "Error retrieving user location, using default", Toast.LENGTH_SHORT);
+
+			p.userLat = 34.0266;
+			p.userLng = -118.283;
+		}
 
 		Log.d(TAG, "submitSearchForm: " + p.toString());
 

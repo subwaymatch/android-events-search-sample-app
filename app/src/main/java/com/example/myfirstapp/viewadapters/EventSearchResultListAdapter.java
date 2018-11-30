@@ -51,7 +51,7 @@ public class EventSearchResultListAdapter extends RecyclerView.Adapter<EventSear
 		viewHolder.venueName.setText(eventSummary.venueInfo);
 		viewHolder.eventDate.setText(eventSummary.date);
 
-		int favoriteIconId = favoriteEventsHelper.checkIfFavorite(eventSummary.id) ?
+		int favoriteIconId = favoriteEventsHelper.checkIfFavorite(eventSummary) ?
 				R.drawable.heart_fill_red : R.drawable.heart_outline_black;
 
 		viewHolder.favoriteIcon.setImageResource(favoriteIconId);
@@ -68,7 +68,7 @@ public class EventSearchResultListAdapter extends RecyclerView.Adapter<EventSear
 		viewHolder.favoriteIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (favoriteEventsHelper.checkIfFavorite(eventSummary.id)) {
+				if (favoriteEventsHelper.checkIfFavorite(eventSummary)) {
 					favoriteEventsHelper.remove(eventSummary);
 					viewHolder.favoriteIcon.setImageResource(R.drawable.heart_outline_black);
 					Toast.makeText(mContext,  eventSummary.name + " was removed from favorites", Toast.LENGTH_SHORT).show();

@@ -93,9 +93,19 @@ public class UpcomingEventsFragment extends Fragment {
 		upcomingEventsSortBySpinner.setEnabled(false);
 		upcomingEventsSortDirectionSpinner.setEnabled(false);
 
+		// If no upcoming events
+		if (upcomingEvents == null || upcomingEvents.length == 0) {
+			showEmptyMessage();
+
+			// Do nothing
+			return;
+		}
+
 		upcomingEventsSortBySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+				if (recyclerViewAdapter == null) return;
+
 				// your code here
 				String sortBy = getResources().getStringArray(R.array.upcoming_events_sort_by_values)[position];
 
@@ -121,6 +131,8 @@ public class UpcomingEventsFragment extends Fragment {
 		upcomingEventsSortDirectionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+				if (recyclerViewAdapter == null) return;
+
 				// your code here
 				String sortDirection = getResources().getStringArray(R.array.upcoming_events_sort_direction_values)[position];
 
