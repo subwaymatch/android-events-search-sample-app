@@ -106,7 +106,7 @@ public class UpcomingEventsListAdapter extends RecyclerView.Adapter<UpcomingEven
 		viewHolder.eventName.setText(upcomingEvent.name);
 		viewHolder.artistName.setText(upcomingEvent.artist);
 		viewHolder.eventDate.setText(upcomingEvent.datetime);
-		viewHolder.eventType.setText(upcomingEvent.type);
+		viewHolder.eventType.setText("Type: " + upcomingEvent.type);
 
 		viewHolder.itemLayout.setOnClickListener(new View.OnClickListener() {
 			@Override

@@ -67,26 +67,13 @@ public class EventSearchResultListActivity extends AppCompatActivity {
 		}
 	}
 
-	private void fetchEventSearchResult(SearchQueryParameters p) {
+	private void fetchEventSearchResult(SearchQueryParameters searchQueryParameters) {
 		// Show progress circle
 		this.progressWrapper.setVisibility(View.VISIBLE);
 
 		RequestQueue httpRequestQueue = Volley.newRequestQueue(this);
 
 		String baseUrl = "http://ticketmaster-v1.us-west-1.elasticbeanstalk.com/api/v1.0/event/search";
-
-		Uri builtUri = Uri.parse(baseUrl)
-				.buildUpon()
-				.appendQueryParameter("keyword", "lakers")
-				.appendQueryParameter("categoryId", "")
-				.appendQueryParameter("distance", "30")
-				.appendQueryParameter("distanceMetric", "miles")
-				.appendQueryParameter("useCurrentLocation", "true")
-				.appendQueryParameter("originLocation", "")
-				.appendQueryParameter("userLat", "34.0584")
-				.appendQueryParameter("userLng", "-118.278")
-				.build();
-/*
 
 		Uri builtUri = Uri.parse(baseUrl)
 				.buildUpon()
@@ -99,7 +86,6 @@ public class EventSearchResultListActivity extends AppCompatActivity {
 				.appendQueryParameter("userLat", Double.toString(searchQueryParameters.userLat))
 				.appendQueryParameter("userLng", Double.toString(searchQueryParameters.userLng))
 				.build();
-*/
 
 		String urlWithParams = builtUri.toString();
 
@@ -109,6 +95,8 @@ public class EventSearchResultListActivity extends AppCompatActivity {
 				Request.Method.GET, urlWithParams, null, new Response.Listener<JSONArray>() {
 			@Override
 			public void onResponse(JSONArray response) {
+				Log.d(TAG, "onResponse: " + response);
+
 				Gson gson = new Gson();
 				Type listType = new TypeToken<List<EventSummary>>(){}.getType();
 				List<EventSummary> eventSummaries = gson.fromJson(response.toString(), listType);
@@ -134,9 +122,7 @@ public class EventSearchResultListActivity extends AppCompatActivity {
 	}
 	
 	private void initRecyclerView(List<EventSummary> eventSummaries) {
-		if (recyclerViewAdapter == null) {
-			recyclerViewAdapter = new EventSearchResultListAdapter(this, eventSummaries);
-		}
+		recyclerViewAdapter = new EventSearchResultListAdapter(this, eventSummaries);
 
 		showRecyclerView();
 	}

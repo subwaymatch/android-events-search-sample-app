@@ -40,8 +40,8 @@ public class ViewHelper {
 	public static TableRow addTextRowToTable(TableLayout tableLayout, final Context context, String rowLabelText, String rowValueText) {
 		int fontSizeSp = 18;
 		int paddingDp = 8;
-		float density = context.getResources().getDisplayMetrics().density;
-		int paddingPixel = Math.round(paddingDp * density);
+
+		int paddingPixel = dpToPixel(context, paddingDp);
 
 		TableRow tableRow = new TableRow(context);
 
@@ -88,5 +88,11 @@ public class ViewHelper {
 				context.startActivity(browserIntent);
 			}
 		});
+	}
+
+	public static int dpToPixel(Context context, int dp) {
+		float density = context.getResources().getDisplayMetrics().density;
+
+		return Math.round(dp * density);
 	}
 }

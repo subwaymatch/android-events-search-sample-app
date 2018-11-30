@@ -52,15 +52,6 @@ public class EventSearchActivity extends AppCompatActivity {
 
 		mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 		tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
-		// TODO: Remove test code below
-		Intent intent = new Intent(this, EventDetailActivity.class);
-		EventSummary eventSummary = new EventSummary();
-		eventSummary.id = "G5eYZ48NRvZc2";
-		eventSummary.venueId = "KovZpZAEdntA";
-		eventSummary.name = "Los Angeles Lakers vs. Minnesota Timberwolves";
-		intent.putExtra("eventSummary", eventSummary);
-		startActivity(intent);
 	}
 
 	/**

@@ -29,7 +29,7 @@ import java.util.Arrays;
  */
 public class UpcomingEventsFragment extends Fragment {
 	private static final String TAG = "UpcomingEventsFragment";
-	private static final int numOfItemsToDisplay = 5;
+	private static final int MAX_NUM_UPCOMING_EVENTS_TO_DISPLAY = 5;
 
 	private EventDetail eventDetail;
 	private UpcomingEvent[] upcomingEvents;
@@ -69,7 +69,7 @@ public class UpcomingEventsFragment extends Fragment {
 		upcomingEvents = eventDetail.upcomingEvents;
 
 		if (upcomingEvents != null && upcomingEvents.length > 0) {
-			upcomingEvents = Arrays.copyOfRange(upcomingEvents, 0, numOfItemsToDisplay);
+			upcomingEvents = Arrays.copyOfRange(upcomingEvents, 0, MAX_NUM_UPCOMING_EVENTS_TO_DISPLAY);
 		}
 	}
 
