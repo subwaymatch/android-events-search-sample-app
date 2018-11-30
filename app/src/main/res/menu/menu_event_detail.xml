@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	tools:context="com.example.myfirstapp.activities.EventDetailActivity">
+	tools:context="com.yejoopark.eventsearch.activities.EventDetailActivity">
 	<item
 		android:id="@+id/eventDetailFavoriteIcon"
 		android:icon="@drawable/heart_fill_white"
