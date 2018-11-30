@@ -105,6 +105,11 @@ public class ArtistTeamPhotosFragment extends Fragment {
 
 		int imageViewPaddingPixel = ViewHelper.dpToPixel(getActivity(), 10);
 
+		if (artistTeamPhotosArray == null) {
+			// Do nothing
+			return;
+		}
+
 		// First artist/team
 		if (artistTeamPhotosArray.length > 0) {
 			ArtistTeamPhotos artistTeamPhotos = artistTeamPhotosArray[0];
